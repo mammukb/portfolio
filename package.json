@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
+    "antd": "^5.25.1",
     "gsap": "^3.12.7",
     "next": "15.2.0",
     "nodemon": "^3.1.9",
