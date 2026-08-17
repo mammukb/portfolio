@@ -96,10 +96,10 @@ export default function Hero() {
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] rounded-full border-[8px] border-gold shadow-[0_0_60px_rgba(201,168,76,0.6)] flex items-center justify-center bg-[#0a0a0a] overflow-hidden group">
               {/* Profile Image - The user is instructed to put the bg-removed image as public/profile.png */}
               <Image 
-                src="/heroimagemkb.jpg" 
+                src="/heromkb.png" 
                 alt="Muhammed K B" 
                 fill
-                className="object-cover z-10 scale-105 group-hover:scale-110 transition-transform duration-500"
+                className="object-cover object-[center_20%] z-10 scale-105 group-hover:scale-110 transition-transform duration-500"
                 priority
               />
               <div className="absolute inset-0 rounded-full border border-gold/50 scale-105 animate-pulse z-20 pointer-events-none"></div>

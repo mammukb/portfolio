@@ -1,8 +1,44 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { message } from "antd";
+import { useForm, ValidationError } from "@formspree/react";
 
 export default function Contact() {
+  const [messageApi, contextHolder] = message.useMessage();
+  const key = "updatable";
+
+  // Function to display success message
+  const showSuccessMessage = () => {
+    messageApi.success({
+      content: "Message has been sent! Wait for the reply 😊",
+      duration: 3, // Duration in seconds
+      key: key,
+    });
+  };
+
+  // Function to display error message
+  const showErrorMessage = () => {
+    messageApi.error({
+      content: "Oops! Something went wrong. Please try again later.",
+      duration: 3, // Duration in seconds
+      key: key,
+    });
+  };
+
+  const [state, handleSubmit] = useForm("xjvngypq");
+
+  // Handle form submission
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const result = await handleSubmit(e);
+    if ((result as any) instanceof Error) {
+      showErrorMessage();
+    } else {
+      showSuccessMessage();
+    }
+  };
+
   return (
     <section id="contact" className="py-24 px-6 md:px-12 mb-20">
       <div className="max-w-4xl mx-auto text-center">
@@ -72,45 +108,56 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="max-w-2xl mx-auto bg-[#0d0d0d] p-8 rounded-2xl border border-white/5 shadow-2xl"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={onSubmit}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div className="flex flex-col text-left">
-              <label htmlFor="name" className="text-gray-400 font-inter text-sm mb-2">Name</label>
+              <label htmlFor="fullname" className="text-gray-400 font-inter text-sm mb-2">Name</label>
               <input
                 type="text"
-                id="name"
+                id="fullname"
+                name="fullname"
+                required
                 className="bg-dark px-4 py-3 rounded-lg border border-white/10 focus:outline-none focus:border-gold text-white font-inter"
                 placeholder="John Doe"
               />
+              <ValidationError prefix="FullName" field="fullname" errors={state.errors} />
             </div>
             <div className="flex flex-col text-left">
               <label htmlFor="email" className="text-gray-400 font-inter text-sm mb-2">Email</label>
               <input
                 type="email"
                 id="email"
+                name="email"
+                required
                 className="bg-dark px-4 py-3 rounded-lg border border-white/10 focus:outline-none focus:border-gold text-white font-inter"
                 placeholder="john@example.com"
               />
+              <ValidationError prefix="Email" field="email" errors={state.errors} />
             </div>
           </div>
           <div className="flex flex-col text-left mb-8">
             <label htmlFor="message" className="text-gray-400 font-inter text-sm mb-2">Message</label>
             <textarea
               id="message"
+              name="message"
+              required
               rows={5}
               className="bg-dark px-4 py-3 rounded-lg border border-white/10 focus:outline-none focus:border-gold text-white font-inter resize-none"
               placeholder="Your message here..."
             ></textarea>
+            <ValidationError prefix="Message" field="message" errors={state.errors} />
           </div>
           
           <button
-            type="button"
-            className="w-full md:w-auto px-8 py-3 bg-gold text-dark font-syne font-bold rounded-lg transition-transform hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.4)]"
+            type="submit"
+            disabled={state.submitting}
+            className="w-full md:w-auto px-8 py-3 bg-gold text-dark font-syne font-bold rounded-lg transition-transform hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Send Message
           </button>
         </motion.form>
+        {contextHolder}
       </div>
     </section>
   );

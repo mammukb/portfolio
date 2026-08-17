@@ -7,19 +7,19 @@ const projects = [
     name: "AI Companion",
     description: "Privacy-first AI diary with local LLM, RAG pipeline, face recognition for memory assistance.",
     tech: ["Next.js", "FastAPI", "PostgreSQL", "ChromaDB", "Ollama"],
-    link: "#",
+    link: "https://github.com/mammukb/AI-Diary_Backend",
   },
   {
     name: "eSignDesk",
     description: "Digital form management system for document submission and staff approval workflow.",
     tech: ["Django", "MongoDB", "Next.js", "jsPDF"],
-    link: "#",
+    link: "https://github.com/mammukb/eSignDesk-backend",
   },
   {
     name: "Seatme",
     description: "Exam seating arrangement web app deployed and operational in college system.",
     tech: ["Web App", "Automated Seating", "Deployed"],
-    link: "#",
+    link: "https://github.com/AnanthuTD/SeatMe-API",
   },
 ];
 
